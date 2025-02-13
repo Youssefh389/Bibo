@@ -1,0 +1,430 @@
+/* إعادة تعيين الأنماط الأساسية */
+
+* {
+
+  margin: 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  font-family: 'Arial', sans-serif;
+
+}
+
+/* زر القائمة الجانبية ثابت */
+
+.toggle-btn {
+
+  position: fixed;
+
+  top: 10px;
+
+  left: 10px;
+
+  z-index: 1001;
+
+  background-color: #2980b9;
+
+  color: #fff;
+
+  border: none;
+
+  padding: 10px 15px;
+
+  cursor: pointer;
+
+  border-radius: 4px;
+
+  font-size: 16px;
+
+}
+
+/* القائمة الجانبية */
+
+.sidebar {
+
+  position: fixed;
+
+  top: 0;
+
+  left: 0;
+
+  width: 250px;
+
+  height: 100%;
+
+  background-color: #34495e;
+
+  color: #fff;
+
+  z-index: 1000;
+
+  overflow-y: auto;
+
+  transition: all 0.3s ease;
+
+}
+
+/* رأس القائمة */
+
+.sidebar-header {
+
+  padding: 15px;
+
+  text-align: center;
+
+  background-color: #2c3e50;
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+}
+
+/* عناصر القائمة داخل الشريط */
+
+.sidebar ul {
+
+  list-style: none;
+
+  padding: 0;
+
+  margin: 0;
+
+}
+
+.sidebar ul li {
+
+  padding: 15px;
+
+  border-bottom: none;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+}
+
+/* نقل عنصر "الحساب" للأسفل قليلًا */
+
+.sidebar ul li[data-page="account"] {
+
+  margin-top: 20px;
+
+}
+
+.sidebar ul li:hover {
+
+  background-color: #2c3e50;
+
+}
+
+/* المحتوى الرئيسي */
+
+.content {
+
+  margin: 0;
+
+  padding: 10px;
+
+  margin-top: 60px;
+
+  position: relative;
+
+}
+
+/* الصفحات */
+
+.page {
+
+  display: none;
+
+  position: relative;
+
+  padding: 10px;
+
+  border-radius: 0;
+
+  overflow: hidden;
+
+  width: 100%;
+
+}
+
+.page.active {
+
+  display: block;
+
+}
+
+/* رؤوس الصفحات */
+
+.page-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+
+  color: #fff;
+
+}
+
+.page-header i {
+
+  font-size: 28px;
+
+}
+
+/* خلفيات الصفحات المميزة */
+
+.account-header, .account-bg {
+
+  background: linear-gradient(135deg, #2980b9, #6dd5fa);
+
+}
+
+.sales-header, .sales-bg {
+
+  background: linear-gradient(135deg, #27ae60, #a8e063);
+
+}
+
+.expenses-header, .expenses-bg {
+
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+
+}
+
+.net-sales-header, .net-sales-bg {
+
+  background: linear-gradient(135deg, #8e44ad, #9b59b6);
+
+}
+
+.artisans-header, .artisans-bg {
+
+  background: linear-gradient(135deg, #f39c12, #f1c40f);
+
+}
+
+/* تأثير خلفية الصفحات */
+
+.page-bg {
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  opacity: 0.1;
+
+  z-index: -1;
+
+}
+
+/* النماذج */
+
+.data-form {
+
+  background-color: rgba(255,255,255,0.9);
+
+  padding: 10px;
+
+  border-radius: 4px;
+
+  margin-bottom: 10px;
+
+}
+
+.data-form .form-group {
+
+  margin-bottom: 8px;
+
+}
+
+.data-form label {
+
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #333;
+
+}
+
+.data-form input,
+
+.data-form select {
+
+  width: 100%;
+
+  padding: 6px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 4px;
+
+}
+
+/* أزرار الحفظ والإضافة */
+
+.save-btn, .add-btn {
+
+  background-color: #2980b9;
+
+  color: #fff;
+
+  border: none;
+
+  padding: 8px 12px;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  margin-top: 8px;
+
+  font-size: 16px;
+
+}
+
+.save-btn:hover, .add-btn:hover {
+
+  background-color: #1f6391;
+
+}
+
+/* تنسيق الجداول بحيث تظهر بشكل كامل بدون حدود داخلية */
+
+table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  margin-bottom: 10px;
+
+  background-color: rgba(255,255,255,0.95);
+
+  border-radius: 0;
+
+  overflow: hidden;
+
+}
+
+table th,
+
+table td {
+
+  padding: 8px;
+
+  border: none; /* إزالة الحدود الداخلية */
+
+  text-align: center;
+
+  white-space: normal;
+
+  word-break: break-word;
+
+}
+
+table th {
+
+  background-color: #2980b9;
+
+  color: #fff;
+
+}
+
+/* صناديق الإجماليات */
+
+.totals {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+
+}
+
+.total-box {
+
+  flex: 1;
+
+  min-width: 150px;
+
+  background-color: rgba(0,0,0,0.1);
+
+  padding: 8px;
+
+  border-radius: 4px;
+
+  text-align: center;
+
+  font-weight: bold;
+
+}
+
+/* قسم إجمالي مبيعات العمال */
+
+.artisan-totals {
+
+  margin-top: 10px;
+
+  padding: 10px;
+
+  background-color: rgba(0,0,0,0.05);
+
+  border-radius: 4px;
+
+}
+
+/* أزرار الشهور */
+
+.months {
+
+  margin: 10px 0;
+
+}
+
+.months button {
+
+  margin-right: 5px;
+
+  background-color: #27ae60;
+
+  color: #fff;
+
+  padding: 6px 10px;
+
+  border: none;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+
+}
+
+.months button:hover {
+
+  background-color: #1e8a4d;
+
+}
+

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html lang="ar">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>تطبيق بيبو - إدارة المبيعات والمصروفات</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- أيقونات Font Awesome -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+</head>
+
+<body>
+
+  <!-- زر القائمة الجانبية ثابت في كل الصفحات -->
+
+  <button id="toggle-btn" class="toggle-btn"><i class="fas fa-bars"></i> القائمة</button>
+
+  <!-- القائمة الجانبية -->
+
+  <nav id="sidebar" class="sidebar">
+
+    <!-- إضافة رأس للقائمة -->
+
+    <div class="sidebar-header">القائمة</div>
+
+    <ul>
+
+      <li data-page="account" class="sidebar-item"><i class="fas fa-calculator"></i> الحساب</li>
+
+      <li data-page="sales" class="sidebar-item"><i class="fas fa-chart-line"></i> المبيعات</li>
+
+      <li data-page="expenses" class="sidebar-item"><i class="fas fa-money-bill-wave"></i> المصروفات</li>
+
+      <li data-page="net-sales" class="sidebar-item"><i class="fas fa-balance-scale"></i> صافي المبيعات</li>
+
+      <li data-page="artisans" class="sidebar-item"><i class="fas fa-user-cog"></i> أسماء العمال</li>
+
+    </ul>
+
+  </nav>
+
+  <!-- المحتوى الرئيسي -->
+
+  <div id="content" class="content">
+
+    <!-- الصفحة الأولى: الحساب -->
+
+    <section id="account" class="page active">
+
+      <header class="page-header account-header">
+
+        <i class="fas fa-calculator"></i>
+
+        <h1>الحساب</h1>
+
+      </header>
+
+      <div class="page-bg account-bg"></div>
+
+      <form id="accountForm" class="data-form">
+
+        <div class="form-group">
+
+          <label for="accountDate">التاريخ:</label>
+
+          <input type="date" id="accountDate" name="date" required />
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="accountAmount">السعر:</label>
+
+          <input type="number" id="accountAmount" name="amount" required />
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="accountArtisan">اسم العامل:</label>
+
+          <select id="accountArtisan" name="artisan" required>
+
+            <!-- ستملأ الخيارات تلقائيًا -->
+
+          </select>
+
+        </div>
+
+        <button type="submit" class="save-btn"><i class="fas fa-save"></i> حفظ</button>
+
+      </form>
+
+    </section>
+
+    <!-- الصفحة الثانية: المبيعات -->
+
+    <section id="sales" class="page">
+
+      <header class="page-header sales-header">
+
+        <i class="fas fa-chart-line"></i>
+
+        <h1>المبيعات</h1>
+
+      </header>
+
+      <div class="page-bg sales-bg"></div>
+
+      <div class="totals">
+
+        <div id="monthlySalesTotal" class="total-box"><i class="fas fa-calendar-alt"></i> إجمالي المبيعات الشهري: 0</div>
+
+        <div id="dailySalesTotals" class="total-box"><i class="fas fa-calendar-day"></i> إجمالي المبيعات اليومية: 0</div>
+
+      </div>
+
+      <table id="salesTable">
+
+        <thead>
+
+          <tr>
+
+            <th>التاريخ</th>
+
+            <th>المبلغ</th>
+
+            <th>اسم العامل</th>
+
+            <th>إجمالي اليوم</th>
+
+            <th>الإجراءات</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <!-- بيانات المبيعات -->
+
+        </tbody>
+
+      </table>
+
+      <!-- عرض إجمالي مبيعات كل عامل -->
+
+      <div id="artisanSalesTotals" class="artisan-totals">
+
+        <!-- سيتم ملئها تلقائيًا -->
+
+      </div>
+
+      <div class="months">
+
+        <button class="month-tab" data-month-offset="1">الشهر السابق 1</button>
+
+        <button class="month-tab" data-month-offset="2">الشهر السابق 2</button>
+
+        <button class="month-tab" data-month-offset="3">الشهر السابق 3</button>
+
+        <button class="month-tab" data-month-offset="4">الشهر السابق 4</button>
+
+        <button class="month-tab" data-month-offset="5">الشهر السابق 5</button>
+
+        <button class="month-tab" data-month-offset="6">الشهر السابق 6</button>
+
+      </div>
+
+      <div id="salesMonthDetails"></div>
+
+    </section>
+
+    <!-- الصفحة الثالثة: المصروفات -->
+
+    <section id="expenses" class="page">
+
+      <header class="page-header expenses-header">
+
+        <i class="fas fa-money-bill-wave"></i>
+
+        <h1>المصروفات</h1>
+
+      </header>
+
+      <div class="page-bg expenses-bg"></div>
+
+      <button id="addExpenseBtn" class="add-btn"><i class="fas fa-plus"></i> إضافة مصروف</button>
+
+      <form id="expenseForm" class="data-form hidden">
+
+        <div class="form-group">
+
+          <label for="expenseDate">التاريخ:</label>
+
+          <input type="date" id="expenseDate" name="date" required />
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="expenseAmount">المبلغ:</label>
+
+          <input type="number" id="expenseAmount" name="amount" required />
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="expenseReason">سبب المصروف:</label>
+
+          <input type="text" id="expenseReason" name="reason" required />
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="expenseArtisan">اسم العامل (اختياري):</label>
+
+          <select id="expenseArtisan" name="artisan">
+
+            <option value="">بدون</option>
+
+          </select>
+
+        </div>
+
+        <button type="submit" class="save-btn"><i class="fas fa-save"></i> حفظ المصروف</button>
+
+      </form>
+
+      <table id="expensesTable">
+
+        <thead>
+
+          <tr>
+
+            <th>التاريخ</th>
+
+            <th>السبب</th>
+
+            <th>المبلغ</th>
+
+            <th>اسم العامل</th>
+
+            <th>إجمالي اليوم</th>
+
+            <th>الإجراءات</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <!-- بيانات المصروفات -->
+
+        </tbody>
+
+      </table>
+
+      <div class="totals">
+
+        <div id="monthlyExpensesTotal" class="total-box"><i class="fas fa-calendar-alt"></i> إجمالي المصروفات الشهري: 0</div>
+
+        <div id="dailyExpensesTotal" class="total-box"><i class="fas fa-calendar-day"></i> إجمالي المصروفات اليومية: 0</div>
+
+      </div>
+
+      <div class="months">
+
+        <button class="month-tab-expense" data-month-offset="1">الشهر السابق 1</button>
+
+        <button class="month-tab-expense" data-month-offset="2">الشهر السابق 2</button>
+
+        <button class="month-tab-expense" data-month-offset="3">الشهر السابق 3</button>
+
+        <button class="month-tab-expense" data-month-offset="4">الشهر السابق 4</button>
+
+        <button class="month-tab-expense" data-month-offset="5">الشهر السابق 5</button>
+
+        <button class="month-tab-expense" data-month-offset="6">الشهر السابق 6</button>
+
+      </div>
+
+      <div id="expenseMonthDetails"></div>
+
+    </section>
+
+    <!-- الصفحة الرابعة: صافي المبيعات -->
+
+    <section id="net-sales" class="page">
+
+      <header class="page-header net-sales-header">
+
+        <i class="fas fa-balance-scale"></i>
+
+        <h1>صافي المبيعات</h1>
+
+      </header>
+
+      <div class="page-bg net-sales-bg"></div>
+
+      <table id="netSalesTable">
+
+        <thead>
+
+          <tr>
+
+            <th>التاريخ</th>
+
+            <th>إجمالي المبيعات</th>
+
+            <th>إجمالي المصروفات</th>
+
+            <th>الصافي</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <!-- بيانات صافي المبيعات -->
+
+        </tbody>
+
+      </table>
+
+      <div class="months">
+
+        <button class="month-tab-net" data-month-offset="1">الشهر السابق 1</button>
+
+        <button class="month-tab-net" data-month-offset="2">الشهر السابق 2</button>
+
+        <button class="month-tab-net" data-month-offset="3">الشهر السابق 3</button>
+
+        <button class="month-tab-net" data-month-offset="4">الشهر السابق 4</button>
+
+        <button class="month-tab-net" data-month-offset="5">الشهر السابق 5</button>
+
+        <button class="month-tab-net" data-month-offset="6">الشهر السابق 6</button>
+
+      </div>
+
+      <div id="netMonthDetails"></div>
+
+    </section>
+
+    <!-- الصفحة الخامسة: أسماء العمال -->
+
+    <section id="artisans" class="page">
+
+      <header class="page-header artisans-header">
+
+        <i class="fas fa-user-cog"></i>
+
+        <h1>أسماء العمال</h1>
+
+      </header>
+
+      <div class="page-bg artisans-bg"></div>
+
+      <button id="addArtisanBtn" class="add-btn"><i class="fas fa-plus"></i> إضافة عامل</button>
+
+      <form id="artisanForm" class="data-form hidden">
+
+        <div class="form-group">
+
+          <label for="artisanName">اسم العامل:</label>
+
+          <input type="text" id="artisanName" name="name" required />
+
+        </div>
+
+        <button type="submit" class="save-btn"><i class="fas fa-save"></i> حفظ العامل</button>
+
+      </form>
+
+      <table id="artisanTable">
+
+        <thead>
+
+          <tr>
+
+            <th>اسم العامل</th>
+
+            <th>ج المبيعات</th>
+
+            <th>ج مصروفات</th>
+
+            <th>المرتب</th>
+
+            <th>الباقي</th>
+
+            <th>حذف</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <!-- بيانات العمال -->
+
+        </tbody>
+
+      </table>
+
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
+
